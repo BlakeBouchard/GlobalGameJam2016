@@ -1,15 +1,22 @@
 fileFormatVersion: 2
-guid: 86cbd336ffe5a4f5680d46ccd03ad1fe
-timeCreated: 1454194682
+guid: 69049774ec83f4db39636063bebb5caa
+timeCreated: 1454196974
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Pyramid
+    100004: Triangle
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Pyramid
+    400002: Pyramid
+    400004: Triangle
+    2300000: Pyramid
+    2300002: Triangle
+    3300000: Pyramid
+    3300002: Triangle
+    4300000: Triangle
+    4300002: Pyramid
     7400000: Default Take
     9500000: //RootNode
   materials:
