@@ -14,9 +14,17 @@ public class AwkwardPersonCollision : MonoBehaviour
     
     }
     
-    void OnTriggerEnter(Collider collider)
+    void OnCollisionEnter(Collision collision)
     {
-        if (!hasConversedAwkwardly && collider.tag == "Player")
+        if (collision.collider.tag == "Player")
+        {
+            OnTriggeredAwkwardPerson();
+        }
+    }
+    
+    void OnTriggeredAwkwardPerson()
+    {
+        if (!hasConversedAwkwardly)
         {
             Debug.Log("Awkward Person triggered");
             GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
