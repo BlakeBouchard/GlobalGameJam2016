@@ -14,18 +14,19 @@ public class AwkwardPersonCollision : MonoBehaviour
     
     }
     
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collider)
     {
-        if (!hasConversedAwkwardly && collision.collider.tag == "Player")
+        if (!hasConversedAwkwardly && collider.tag == "Player")
         {
+            Debug.Log("Awkward Person triggered");
             GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
             gameManager.IncreaseStress(stressIncrease);
             hasConversedAwkwardly = true;
             
             // Fade the Awkward Person out for now
-            SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-            Color color = spriteRenderer.color;
-            color.a = fadedOpacity;
+            Renderer renderer = GetComponent<Renderer>();
+            
+            renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, fadedOpacity);
         }
     }
 	
