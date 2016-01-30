@@ -9,9 +9,9 @@ public class Beer : MonoBehaviour
     {
     }
     
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collider)
     {
-        if (collision.collider.tag == "Player")
+        if (collider.tag == "Player")
         {
             GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
             
@@ -19,7 +19,9 @@ public class Beer : MonoBehaviour
             
             // TODO: Play sound like "Ahhh"
             
-            Destroy(transform);
+            Debug.Log("MMMM That's good beer!");
+            
+            Destroy(gameObject);
         }
     }
 	
