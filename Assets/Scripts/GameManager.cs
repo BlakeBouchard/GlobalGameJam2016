@@ -2,33 +2,43 @@
 
 public class GameManager : MonoBehaviour
 {
-    int ConversationEnergy = 0;
-    public int ConversationGoal = 100;
-    int StressLevel = 0;
-    public int StressLimit = 10;
+    int conversationEnergy = 0;
+    public int conversationGoal = 100;
+    int stressLevel = 0;
+    public int stressLimit = 10;
+    
+    bool failed = false;
+    
+    bool won = false;
     
     // Use this for initialization
     void Start()
     {
-        
+    }
+    
+    public void IncreaseStress(int amount)
+    {
+        stressLevel -= amount;
     }
     
     public void ReduceStress(int amount)
     {
-        StressLevel = Mathf.Max(0, StressLevel - amount);
+        stressLevel = Mathf.Max(0, stressLevel - amount);
     }
 	
     // Update is called once per frame
     void Update()
     {
-        if (StressLevel >= StressLimit)
+        if (!failed && stressLevel >= stressLimit)
         {
             Debug.Log("OH NO YOU GOT TOO STRESSED OUT");
+            failed = true;
         }
         
-        if (ConversationEnergy >= ConversationGoal)
+        if (!won && conversationEnergy >= conversationGoal)
         {
             Debug.Log("You did it! You put an effort in and everybody saw it so now you can go home and watch Game of Thrones!");
+            won = true;
         }
     }
 }

@@ -1,30 +1,32 @@
 ﻿using UnityEngine;
 
-public class Beer : MonoBehaviour
+public class AwkwardPersonCollision : MonoBehaviour
 {
-    public int stressReductionAmount = 1;
+    bool hasConversedAwkwardly = false;
+    
+    public int stressIncrease = 2;
     
     // Use this for initialization
     void Start()
     {
+    
     }
     
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "Player")
+        if (collision.collider.tag == "Player" && !hasConversedAwkwardly)
         {
             GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
             
-            gameManager.ReduceStress(stressReductionAmount);
+            gameManager.IncreaseStress(stressIncrease);
             
-            // TODO: Play sound like "Ahhh"
-            
-            Destroy(transform);
+            hasConversedAwkwardly = true;
         }
     }
 	
     // Update is called once per frame
     void Update()
     {
+    
     }
 }
