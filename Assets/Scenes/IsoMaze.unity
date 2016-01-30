@@ -507,7 +507,7 @@ GameObject:
   - 65: {fileID: 1674050230}
   - 23: {fileID: 1674050229}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
