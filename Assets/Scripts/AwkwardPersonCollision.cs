@@ -14,7 +14,7 @@ public class AwkwardPersonCollision : MonoBehaviour
     
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "Player" && !hasConversedAwkwardly)
+        if (!hasConversedAwkwardly && collision.collider.tag == "Player")
         {
             GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
             
