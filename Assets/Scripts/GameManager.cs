@@ -2,9 +2,9 @@
 
 public class GameManager : MonoBehaviour
 {
-    int conversationEnergy = 0;
+    public int conversationEnergy = 0;
     public int conversationGoal = 100;
-    int stressLevel = 0;
+    public int stressLevel = 0;
     public int stressLimit = 10;
     
     bool failed = false;
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     
     public void IncreaseStress(int amount)
     {
-        stressLevel -= amount;
+        stressLevel += amount;
     }
     
     public void ReduceStress(int amount)
