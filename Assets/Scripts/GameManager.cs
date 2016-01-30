@@ -12,6 +12,11 @@ public class GameManager : MonoBehaviour
     {
         
     }
+    
+    public void ReduceStress(int amount)
+    {
+        StressLevel = Mathf.Max(0, StressLevel - amount);
+    }
 	
     // Update is called once per frame
     void Update()
@@ -21,7 +26,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("OH NO YOU GOT TOO STRESSED OUT");
         }
         
-        if (ConversationEnergy == ConversationGoal)
+        if (ConversationEnergy >= ConversationGoal)
         {
             Debug.Log("You did it! You put an effort in and everybody saw it so now you can go home and watch Game of Thrones!");
         }
