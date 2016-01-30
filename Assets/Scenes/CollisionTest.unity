@@ -199,6 +199,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6503914, guid: fbd760f3332564aae994cc1db6befaa6, type: 2}
+      propertyPath: m_Size.x
+      value: 0.99985874
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503914, guid: fbd760f3332564aae994cc1db6befaa6, type: 2}
+      propertyPath: m_Center.x
+      value: 0.00007200241
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fbd760f3332564aae994cc1db6befaa6, type: 2}
   m_IsPrefabParent: 0
@@ -992,6 +1000,23 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 494356, guid: 5f142e7cb3f334fa7976221fbc22b225, type: 2}
   m_PrefabInternal: {fileID: 92677689}
+--- !u!1 &1808230157 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 193306, guid: d0374e61933e34c278caafccf1b4cb9f, type: 2}
+  m_PrefabInternal: {fileID: 1062907092}
+--- !u!114 &1808230158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1808230157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c36a01bcf9cd944d8885428b87f3ddb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomDialogueFile: Assets/Speech/RandomDialogue.txt
+  randomDialog: []
 --- !u!1 &1901853373
 GameObject:
   m_ObjectHideFlags: 0
