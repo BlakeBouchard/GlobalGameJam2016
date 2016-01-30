@@ -3,17 +3,19 @@ using System.Collections;
 
 public class AwkwardPerson : MonoBehaviour
 {
-    enum Behaviour
+    public enum Behaviour
     {
           Idle
         , Wandering
         , MoveToObject
         , FleeObject
         , Patrolling
+        , PatrolWait
     }
 
     // Public
     public GameObject game_object;
+    public Behaviour current_behaviour = Behaviour.Patrolling;
 
     public GameObject patrol_start;
     public GameObject patrol_end;
@@ -21,11 +23,11 @@ public class AwkwardPerson : MonoBehaviour
     public float movement_speed = 5.0f;
     //---
 
-    Behaviour current_behaviour = Behaviour.Idle;
+    Vector3 movement_target;
 
     // Use this for initialization
     void Start () {
-
+        movement_target = patrol_start.transform.position;
     }
 
     // Update is called once per frame
@@ -44,7 +46,24 @@ public class AwkwardPerson : MonoBehaviour
             }
             case Behaviour.Patrolling:
             {
-                break;
+                //todo: handle iterating path list instead of hard coding for two points
+
+                if(game_object.transform.position == patrol_start.transform.position)
+                {
+                    movement_target = patrol_end.transform.position;
+                }
+                else if(game_object.transform.position == patrol_end.transform.position)
+                {
+                    movement_target = patrol_start.transform.position;
+                }
+
+                MoveToward(movement_target);
+            break;
+            }
+            case Behaviour.PatrolWait:
+            {
+                
+            break;
             }
         };
     }
