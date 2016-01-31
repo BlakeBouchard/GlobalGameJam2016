@@ -72,6 +72,12 @@ public class AwkwardPerson : MonoBehaviour
         return nearest;
     }
 
+    void SetPatrolNode(int node_index)
+    {
+        movement_target = current_path[node_index].position;
+        current_path_node_index = node_index;
+    }
+
     // Use this for initialization
     void Start ()
     {
@@ -173,7 +179,12 @@ public class AwkwardPerson : MonoBehaviour
             }
         case State.Patrolling:
             {
-                current_path_node_index = NearestPathNodeIndex();
+                //check this to prevent constantly walking towards the nearest node
+                if(current_behaviour != State.PatrolWait)
+                {
+                    SetPatrolNode(NearestPathNodeIndex());
+                }
+
                 current_movespeed = movement_speed_slow;
                 break;
             }
@@ -246,8 +257,7 @@ public class AwkwardPerson : MonoBehaviour
                         current_path_node_index = 0;
                     }
 
-                    movement_target = current_path[NextPathNodeIndex].position;
-                    current_path_node_index = NextPathNodeIndex;
+                    SetPatrolNode(NextPathNodeIndex);
                     SetState(State.PatrolWait);
                 }
                 break;
