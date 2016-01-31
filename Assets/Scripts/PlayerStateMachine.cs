@@ -8,6 +8,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
           Idle
         , InGroupConverstaion
+        , InAwkwardConversation
         , JammingToBand
         , Drinking
     }
@@ -15,6 +16,8 @@ public class PlayerStateMachine : MonoBehaviour
 //    PlayerState current_state;
     List<PlayerState> state_stack = new List<PlayerState>();
     List<ConversationCircle> current_conversations = new List<ConversationCircle>();
+
+    AwkwardConversation current_awkward_convo;
 
     PlayerState CurrentState { 
         get { return state_stack[state_stack.Count - 1]; }
@@ -39,6 +42,11 @@ public class PlayerStateMachine : MonoBehaviour
         {
             convo.UpdateTransfer();
         }
+
+        if(current_awkward_convo != null)
+        {
+            current_awkward_convo.Update();
+        }
     }
 
     public void SetState(PlayerState override_state, bool kill_stack = false)
@@ -49,7 +57,8 @@ public class PlayerStateMachine : MonoBehaviour
             state_stack.Add(override_state);
         }
 
-        CurrentState = override_state;
+        PopState();
+        PushState(override_state);
     }
 
     public void PushState(PlayerState new_state)
@@ -61,8 +70,14 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if(state_stack.Count > 1)
         {
+            if(CurrentState == PlayerState.InAwkwardConversation)
+            {
+                current_awkward_convo.EndConversation();
+            }
+
             var temp = CurrentState;
             state_stack.RemoveAt(state_stack.Count - 1);
+
             return temp;
         }
 
@@ -93,6 +108,16 @@ public class PlayerStateMachine : MonoBehaviour
     private static bool IsConvo(PlayerState state)
     {
         return state == PlayerState.InGroupConverstaion;
+    }
+
+    public void EngageAwkwardConversation(AwkwardPerson with_person)
+    {
+        current_awkward_convo = new AwkwardConversation(this, with_person);
+    }
+    public void EndAwkwardConversation()
+    {
+        PopState();
+        current_awkward_convo = null;
     }
 }
 

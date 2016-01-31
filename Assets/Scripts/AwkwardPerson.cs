@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class AwkwardPerson : MonoBehaviour
 {
-    public enum Behaviour
+    public enum State
     {
           Idle
         , Patrolling
@@ -15,11 +15,11 @@ public class AwkwardPerson : MonoBehaviour
     }
         
     public bool has_conversed = false; //no longer an active threat when true
-    public Behaviour current_behaviour = Behaviour.Patrolling;
+    public State current_behaviour = State.Patrolling;
     public float movement_speed = 5.0f;
 
     public Camera view_cam;
-    public BoxCollider player_test;
+    public GameObject player;
 
     public float[] patrol_wait_time_bounds = {0.5f, 2.0f};
 
@@ -77,10 +77,9 @@ public class AwkwardPerson : MonoBehaviour
             movement_target = current_path[0].position;
         }
         
-        if (player_test == null)
+        if (player == null)
         {
-            // Find the player object and grab the BoxCollider from it
-            player_test = GameObject.Find("Player").GetComponent<BoxCollider>();
+            player = GameObject.Find("Player");
         }
 
         idle_original_rotation = transform.rotation;
@@ -92,34 +91,35 @@ public class AwkwardPerson : MonoBehaviour
     void Update () {
         UpdateBehaviourMachine();
 
-        //testing frustum collision
-//        if(CanSeePlayer(player_test.bounds))
-        if(ShouldFollowPlayer())
+        if(!has_conversed && current_behaviour != State.Conversing)
         {
-            GetComponent<MeshRenderer>().material.color = Color.red;
-
-            this.SendMessage("OnTriggeredAwkwardPerson", null, SendMessageOptions.DontRequireReceiver);
-
-            if(WithinConversationRange(player_test.transform))
+            if(ShouldFollowPlayer())
             {
-                //todo: trigger conversation
-                if(current_behaviour != Behaviour.Conversing)
+                GetComponent<MeshRenderer>().material.color = Color.red;
+
+                this.SendMessage("OnTriggeredAwkwardPerson", null, SendMessageOptions.DontRequireReceiver);
+
+                if(WithinConversationRange(player.transform))
                 {
-                    SetState(Behaviour.Conversing);
+                    //todo: trigger conversation
+                    if(current_behaviour != State.Conversing)
+                    {
+                        SetState(State.Conversing);
+                    }
                 }
+                else
+                {
+                    if(current_behaviour != State.MoveToObject)
+                    {
+                        target_object = player;
+                        SetState(State.MoveToObject);
+                    }
+                }    
             }
             else
             {
-                if(current_behaviour != Behaviour.MoveToObject)
-                {
-                    target_object = player_test.gameObject;
-                    SetState(Behaviour.MoveToObject);
-                }
-            }    
-        }
-        else //else should not follow player
-        {
-            GetComponent<MeshRenderer>().material.color = Color.green;
+                GetComponent<MeshRenderer>().material.color = Color.green;
+            }
         }
     }
 
@@ -138,10 +138,10 @@ public class AwkwardPerson : MonoBehaviour
     {
         //todo: check if eye contact is established, or already moving to target
 
-        return CanSeePlayer(player_test.bounds);
+        return CanSeePlayer(player.GetComponent<BoxCollider>().bounds);
     }
 
-    void SetState(Behaviour new_behaviour)
+    public void SetState(State new_behaviour)
     {
         //todo: state transitions
         //        switch(current_behaviour)
@@ -150,15 +150,25 @@ public class AwkwardPerson : MonoBehaviour
 
         switch(new_behaviour)
         {
-        case Behaviour.Idle:
+        case State.Idle:
             {
                 idle_original_rotation = transform.rotation;
                 break;
             }
 
-        case Behaviour.PatrolWait:
+        case State.PatrolWait:
             {
                 wait_timer = Random.Range(patrol_wait_time_bounds[0], patrol_wait_time_bounds[1]);
+                break;
+            }
+
+        case State.Conversing:
+            {
+                Debug.Assert(player.GetComponent<PlayerStateMachine>() != null);
+                player.GetComponent<PlayerStateMachine>().EngageAwkwardConversation(this);
+
+                GetComponent<MeshRenderer>().material.color = Color.yellow;
+
                 break;
             }
         }
@@ -170,7 +180,7 @@ public class AwkwardPerson : MonoBehaviour
     {
         switch (current_behaviour)
         {
-        case Behaviour.Idle:
+        case State.Idle:
             {
                 wait_timer -= Time.deltaTime;
 
@@ -190,11 +200,11 @@ public class AwkwardPerson : MonoBehaviour
                 break;
             }
 
-        case Behaviour.Patrolling:
+        case State.Patrolling:
             {
                 if(current_path.Count < 2)
                 {
-                    SetState(Behaviour.Idle);
+                    SetState(State.Idle);
                 }
 
                 MoveToward(movement_target);
@@ -210,23 +220,23 @@ public class AwkwardPerson : MonoBehaviour
 
                     movement_target = current_path[NextPathNodeIndex].position;
                     current_path_node_index = NextPathNodeIndex;
-                    SetState(Behaviour.PatrolWait);
+                    SetState(State.PatrolWait);
                 }
                 break;
             }
 
-        case Behaviour.PatrolWait:
+        case State.PatrolWait:
             {
                 wait_timer -= Time.deltaTime;
 
                 if(wait_timer <= 0)
                 {
-                    SetState(Behaviour.Patrolling);
+                    SetState(State.Patrolling);
                 }
                 break;
             }
 
-        case Behaviour.MoveToObject:
+        case State.MoveToObject:
             {
                 movement_target = target_object.transform.position;
                 MoveToward(movement_target);
@@ -243,7 +253,7 @@ public class AwkwardPerson : MonoBehaviour
         var movement_vec = dir * movement_speed * Time.deltaTime;
 
         //set facing direction
-        transform.LookAt(target_pos, Vector3.forward); //use forward to rotate around Z axis
+        transform.LookAt(target_pos, Vector3.up);
 
         if(dist.magnitude <= movement_amount)
         {
@@ -255,6 +265,12 @@ public class AwkwardPerson : MonoBehaviour
         }
     }
 
+    public void EndAwkwardConversation()
+    {
+        has_conversed = true;
+        SetState(State.Patrolling);
+        GetComponent<MeshRenderer>().material.color = Color.white;
+    }
 
 
 
