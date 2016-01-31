@@ -93,6 +93,9 @@ public class GameManager : MonoBehaviour
         conversationText.text = currentConversation.conversationText;
         option1Text.text = "(Up): " + currentConversation.options[0].Key;
         option2Text.text = "(Down): " + currentConversation.options[1].Key;
+        
+        int random = Random.Range(1, 4);
+        GameObject.Find("Talk Sound " + random).GetComponent<AudioSource>().Play();
     }
     
     public void AnswerAwkwardConversation(int optionPicked)
@@ -102,6 +105,8 @@ public class GameManager : MonoBehaviour
         option1Text.text = "";
         option2Text.text = "";
         inConversation = false;
+        
+        GameObject.Find("Stress Sound 1").GetComponent<AudioSource>().Play();
         
         GameObject.Find("AwkwardTurtle").SendMessage("EndAwkwardConversation", SendMessageOptions.DontRequireReceiver);
         GameObject.Find("Player").SendMessage("EndAwkwardConversation", SendMessageOptions.DontRequireReceiver);
@@ -113,6 +118,7 @@ public class GameManager : MonoBehaviour
         if (!failed && stressLevel >= stressLimit)
         {
             Debug.Log("OH NO YOU GOT TOO STRESSED OUT");
+            GameObject.Find("Stress Sound 2").GetComponent<AudioSource>().Play();
             failed = true;
         }
         
