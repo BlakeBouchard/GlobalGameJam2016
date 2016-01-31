@@ -71,6 +71,12 @@ public class AwkwardPerson : MonoBehaviour
         {
             movement_target = current_path[0].position;
         }
+        
+        if (player_test == null)
+        {
+            // Find the player object and grab the BoxCollider from it
+            player_test = GameObject.Find("Player").GetComponent<BoxCollider>();
+        }
 
         idle_original_rotation = transform.rotation;
         target_rotation        = transform.rotation;
@@ -86,8 +92,7 @@ public class AwkwardPerson : MonoBehaviour
         {
             GetComponent<MeshRenderer>().material.color = Color.red;
 
-            //todo: call something in GameManager?
-
+            this.SendMessage("OnTriggeredAwkwardPerson", null, SendMessageOptions.DontRequireReceiver);
         }
         else
         {
