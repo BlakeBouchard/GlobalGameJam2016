@@ -6,9 +6,14 @@ public class PlayerController : MonoBehaviour
 	const double DEAD_ZONE = 0.2;
 
 	public float speed;
+
+	private Vector3 screenUp;
+	private Vector3 screenRight;
 	
 	void Start()
 	{
+		screenUp = new Vector3 (1, 0, 1).normalized;
+		screenRight = new Vector3 (1, 0, -1).normalized;
 	}
 	
 	void FixedUpdate ()
@@ -21,7 +26,10 @@ public class PlayerController : MonoBehaviour
 		int moveVertical = ((verticalInput > DEAD_ZONE) ? 1 :
 			((verticalInput < -DEAD_ZONE) ? -1 : 0));
 
-		Vector3 movement = new Vector3(moveHorizontal * speed, 0.0f, moveVertical * speed);
+		Vector3 movement = ((screenUp * moveVertical) + (screenRight * moveHorizontal)).normalized * speed;
+
+		// Transform to screen directions
+
 
 		GetComponent<Rigidbody>().velocity = movement;
 	}
