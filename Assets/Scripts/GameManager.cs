@@ -25,6 +25,11 @@ public class GameManager : MonoBehaviour
     {
         stressLevel = Mathf.Max(0, stressLevel - amount);
     }
+
+    public void GainConversationEnergy(int amount)
+    {
+        conversationEnergy += amount;
+    }
 	
     // Update is called once per frame
     void Update()

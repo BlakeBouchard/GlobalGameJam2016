@@ -31,7 +31,14 @@ public class PlayerStateMachine : MonoBehaviour
     public void Start ()
     {
         state_stack.Add(PlayerState.Idle);
+    }
 
+    public void Update()
+    {
+        foreach(ConversationCircle convo in current_conversations)
+        {
+            convo.UpdateTransfer();
+        }
     }
 
     public void SetState(PlayerState override_state, bool kill_stack = false)
