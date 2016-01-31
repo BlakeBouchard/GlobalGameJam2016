@@ -106,7 +106,7 @@ public class AwkwardPerson : MonoBehaviour
         {
             if(ShouldFollowPlayer())
             {
-                GetComponent<SpriteRenderer>().material.color = Color.red;
+                transform.Find("NPC Sprite").GetComponent<SpriteRenderer>().material.color = Color.red;
 
                 this.SendMessage("OnTriggeredAwkwardPerson", null, SendMessageOptions.DontRequireReceiver);
 
@@ -134,7 +134,7 @@ public class AwkwardPerson : MonoBehaviour
                     SetState(State.Patrolling);
                 }
 
-                GetComponent<SpriteRenderer>().material.color = Color.green;
+                transform.Find("NPC Sprite").GetComponent<SpriteRenderer>().material.color = Color.green;
             }
         }
     }
@@ -206,7 +206,7 @@ public class AwkwardPerson : MonoBehaviour
                 Debug.Assert(player.GetComponent<PlayerStateMachine>() != null);
                 player.GetComponent<PlayerStateMachine>().EngageAwkwardConversation(this);
 
-                GetComponent<SpriteRenderer>().material.color = Color.yellow;
+                transform.Find("NPC Sprite").GetComponent<SpriteRenderer>().material.color = Color.yellow;
 
                 break;
             }
@@ -307,7 +307,7 @@ public class AwkwardPerson : MonoBehaviour
     {
         has_conversed = true;
         SetState(State.Patrolling);
-        GetComponent<SpriteRenderer>().material.color = Color.white;
+        transform.Find("NPC Sprite").GetComponent<SpriteRenderer>().material.color = Color.white;
     }
 
 
