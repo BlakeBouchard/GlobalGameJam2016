@@ -202,17 +202,18 @@ public class AwkwardPerson : MonoBehaviour
     {
         var dist = target_pos - transform.position;
         var dir = dist.normalized;
+        var movement_vec = dir * movement_speed * Time.deltaTime;
 
         //set facing direction
         transform.LookAt(target_pos, Vector3.forward); //use forward to rotate around Z axis
 
-        if(dist.magnitude <= movement_speed)
+        if(dist.magnitude <= movement_vec)
         {
             transform.position = target_pos;
         }
         else
         {
-            transform.position  += dir * movement_speed * Time.deltaTime;
+            transform.position  += movement_vec;
         }
     }
 
