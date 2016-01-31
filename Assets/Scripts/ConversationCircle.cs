@@ -20,7 +20,7 @@ public class ConversationCircle : MonoBehaviour
 	void Start () {
         Color init_color = Color.grey;
         init_color.a = 0.5f;
-        GetComponent<SpriteRenderer>().material.color = init_color;
+        transform.Find("CircleSprite").GetComponent<SpriteRenderer>().material.color = init_color;
 
 //        max_convo_energy = current_convo_energy;
         transfer_timer = transfer_tick_period;
@@ -55,7 +55,7 @@ public class ConversationCircle : MonoBehaviour
         {
             Color c = Color.red;
             c.a = 0.2f;
-            GetComponent<SpriteRenderer>().material.color = c;
+            transform.Find("CircleSprite").GetComponent<SpriteRenderer>().material.color = c;
         }
     }
 
@@ -67,7 +67,7 @@ public class ConversationCircle : MonoBehaviour
 
             Color c = Color.yellow;
             c.a = 0.5f;
-            GetComponent<SpriteRenderer>().material.color = c;
+            transform.Find("CircleSprite").GetComponent<SpriteRenderer>().material.color = c;
             
             GetComponent<AudioSource>().Play();
         }
@@ -81,7 +81,7 @@ public class ConversationCircle : MonoBehaviour
 
             Color c = Color.grey;
             c.a = 0.5f;
-            GetComponent<SpriteRenderer>().material.color = c;
+            transform.Find("CircleSprite").GetComponent<SpriteRenderer>().material.color = c;
             
             GetComponent<AudioSource>().Stop();
         }
