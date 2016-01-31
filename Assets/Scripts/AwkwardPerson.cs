@@ -14,7 +14,7 @@ public class AwkwardPerson : MonoBehaviour
         , Conversing
     }
         
-    public float has_conversed = false; //no longer an active threat when true
+    public bool has_conversed = false; //no longer an active threat when true
     public Behaviour current_behaviour = Behaviour.Patrolling;
     public float movement_speed = 5.0f;
 
