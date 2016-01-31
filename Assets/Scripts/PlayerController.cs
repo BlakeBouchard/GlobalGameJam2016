@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour 
 {	
+	const double DEAD_ZONE = 0.2;
+
 	public float speed;
 	
 	void Start()
@@ -11,13 +13,13 @@ public class PlayerController : MonoBehaviour
 	
 	void FixedUpdate ()
 	{
-		float horizontalInput = Input.GetAxis("Horizontal");
-		float verticalInput = Input.GetAxis("Vertical");
+		float horizontalInput = Input.GetAxisRaw("Horizontal");
+		float verticalInput = Input.GetAxisRaw("Vertical");
 
-		int moveHorizontal = ((horizontalInput > 0) ? 1 :
-			((horizontalInput < 0) ? -1 : 0));
-		int moveVertical = ((verticalInput > 0) ? 1 :
-			((verticalInput < 0) ? -1 : 0));
+		int moveHorizontal = ((horizontalInput > DEAD_ZONE) ? 1 :
+			((horizontalInput < -DEAD_ZONE) ? -1 : 0));
+		int moveVertical = ((verticalInput > DEAD_ZONE) ? 1 :
+			((verticalInput < -DEAD_ZONE) ? -1 : 0));
 
 		Vector3 movement = new Vector3(moveHorizontal * speed, 0.0f, moveVertical * speed);
 

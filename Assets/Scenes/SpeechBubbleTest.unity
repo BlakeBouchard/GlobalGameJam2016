@@ -552,6 +552,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 603763055}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &642566009 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 193306, guid: d0374e61933e34c278caafccf1b4cb9f, type: 2}
+  m_PrefabInternal: {fileID: 1062907092}
+--- !u!114 &642566010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 642566009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c36a01bcf9cd944d8885428b87f3ddb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomDialogueFile: Assets/Speech/RandomDialogue.txt
+  randomDialog: []
 --- !u!1 &819025510
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,6 +1017,56 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 494356, guid: 5f142e7cb3f334fa7976221fbc22b225, type: 2}
   m_PrefabInternal: {fileID: 92677689}
+--- !u!1001 &1810595156
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1991635073}
+    m_Modifications:
+    - target: {fileID: 434436, guid: 7627f922e1bd04f3b94b9131b862ebd7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 434436, guid: 7627f922e1bd04f3b94b9131b862ebd7, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434436, guid: 7627f922e1bd04f3b94b9131b862ebd7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434436, guid: 7627f922e1bd04f3b94b9131b862ebd7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434436, guid: 7627f922e1bd04f3b94b9131b862ebd7, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434436, guid: 7627f922e1bd04f3b94b9131b862ebd7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434436, guid: 7627f922e1bd04f3b94b9131b862ebd7, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 434436, guid: 7627f922e1bd04f3b94b9131b862ebd7, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 160946, guid: 7627f922e1bd04f3b94b9131b862ebd7, type: 2}
+      propertyPath: m_Name
+      value: Chatterbox
+      objectReference: {fileID: 0}
+    - target: {fileID: 10297062, guid: 7627f922e1bd04f3b94b9131b862ebd7, type: 2}
+      propertyPath: m_FontSize
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 7627f922e1bd04f3b94b9131b862ebd7, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1901853373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,22 +1128,10 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
---- !u!1 &1991635067 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 185182, guid: 9879fdcba18fb4fae9443d275cf623e9, type: 2}
+--- !u!4 &1991635073 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 435966, guid: 9879fdcba18fb4fae9443d275cf623e9, type: 2}
   m_PrefabInternal: {fileID: 1760397060}
---- !u!114 &1991635074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1991635067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42ecb8cdfacfb4ef3af29f426afa6ed6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speechBubble: {fileID: 109230, guid: 7627f922e1bd04f3b94b9131b862ebd7, type: 2}
 --- !u!1 &1994319168
 GameObject:
   m_ObjectHideFlags: 0
