@@ -51,7 +51,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &176110
 GameObject:
   m_ObjectHideFlags: 1
@@ -101,6 +101,7 @@ GameObject:
   - 23: {fileID: 2368168}
   - 114: {fileID: 11459262}
   - 114: {fileID: 11482616}
+  - 114: {fileID: 11495118}
   m_Layer: 0
   m_Name: AwkwardTurtle
   m_TagString: Untagged
@@ -158,7 +159,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 185182}
   m_LocalRotation: {x: -0.5000001, y: -0.5, z: 0.5, w: 0.49999994}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -6.44, y: 0.5, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 429424}
@@ -500,12 +501,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f15914fc82ac43f98dce9445d5f47de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  has_conversed: 0
   current_behaviour: 1
   movement_speed: 0.5
-  target_rotation: {x: 0, y: 0, z: 0, w: 0}
-  prev_target_rotation: {x: 0, y: 0, z: 0, w: 0}
   view_cam: {fileID: 2094560}
-  player_test: {fileID: 0}
+  player: {fileID: 0}
   patrol_wait_time_bounds:
   - 0.5
   - 2
@@ -514,7 +514,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   path_loops: 1
-  idle_original_rotation: {x: 0, y: 0, z: 0, w: 0}
+  conversation_range: 2
 --- !u!114 &11482616
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -528,6 +528,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stressIncrease: 2
   fadedOpacity: 0.3
+--- !u!114 &11495118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 185182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!124 &12470646
 Behaviour:
   m_ObjectHideFlags: 1
