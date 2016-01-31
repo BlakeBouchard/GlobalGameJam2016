@@ -31,6 +31,13 @@ public class PlayerController : MonoBehaviour
 		// Transform to screen directions
 
 
-		GetComponent<Rigidbody>().velocity = movement;
+        if(GetComponent<PlayerStateMachine>().CurrentState != PlayerStateMachine.PlayerState.InAwkwardConversation)
+        {
+            GetComponent<Rigidbody>().velocity = movement;
+        }
+        else
+        {
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
 	}
 }

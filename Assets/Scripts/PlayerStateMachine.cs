@@ -70,11 +70,6 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if(state_stack.Count > 1)
         {
-            if(CurrentState == PlayerState.InAwkwardConversation)
-            {
-                current_awkward_convo.EndConversation();
-            }
-
             var temp = CurrentState;
             state_stack.RemoveAt(state_stack.Count - 1);
 
@@ -113,9 +108,11 @@ public class PlayerStateMachine : MonoBehaviour
     public void EngageAwkwardConversation(AwkwardPerson with_person)
     {
         current_awkward_convo = new AwkwardConversation(this, with_person);
+        PushState(PlayerState.InAwkwardConversation);
     }
     public void EndAwkwardConversation()
     {
+        Debug.Assert(CurrentState == PlayerState.InAwkwardConversation);
         PopState();
         current_awkward_convo = null;
     }
