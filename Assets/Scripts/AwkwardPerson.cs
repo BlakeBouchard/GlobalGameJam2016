@@ -16,7 +16,8 @@ public class AwkwardPerson : MonoBehaviour
         
     public bool has_conversed = false; //no longer an active threat when true
     public State current_behaviour = State.Patrolling;
-    public float movement_speed = 5.0f;
+    public float movement_speed_slow = 5.0f;
+    public float movement_speed_fast = 7.0f;
 
     public Camera view_cam;
     public GameObject player;
@@ -28,9 +29,11 @@ public class AwkwardPerson : MonoBehaviour
     int current_path_node_index = 0;
 
     public float conversation_range = 2.0f; //how close the player is before starting a conversation
-
+    public float aggro_range = 5.0f;
+    public float leash_range = 5.0f; // will drop chase if target is this far away
 
     Vector3 movement_target;
+    float current_movespeed;
 
     Quaternion idle_original_rotation;
     Quaternion target_rotation;
@@ -82,6 +85,8 @@ public class AwkwardPerson : MonoBehaviour
             player = GameObject.Find("Player");
         }
 
+        current_movespeed = movement_speed_slow;
+
         idle_original_rotation = transform.rotation;
         target_rotation        = transform.rotation;
         prev_target_rotation   = transform.rotation;
@@ -118,10 +123,17 @@ public class AwkwardPerson : MonoBehaviour
             }
             else
             {
+                if(IsChasingPlayer)
+                {
+                    SetState(State.Patrolling);
+                }
+
                 GetComponent<MeshRenderer>().material.color = Color.green;
             }
         }
     }
+
+    bool IsChasingPlayer { get { return current_behaviour == State.MoveToObject && target_object == player; } }
 
     bool CanSeePlayer(Bounds player_bounds)
     {
@@ -138,8 +150,12 @@ public class AwkwardPerson : MonoBehaviour
     {
         //todo: check if eye contact is established, or already moving to target
 
-        return CanSeePlayer(player.GetComponent<BoxCollider>().bounds);
+        return InAggroRange(player) &&  CanSeePlayer(player.GetComponent<BoxCollider>().bounds);
     }
+
+    bool InAggroRange(Vector3 pos) { return (pos - transform.position).magnitude <= aggro_range; }
+    bool InAggroRange(Transform t) { return InAggroRange(t.position);}
+    bool InAggroRange(GameObject o) { return InAggroRange(o.transform.position);}
 
     public void SetState(State new_behaviour)
     {
@@ -155,10 +171,22 @@ public class AwkwardPerson : MonoBehaviour
                 idle_original_rotation = transform.rotation;
                 break;
             }
+        case State.Patrolling:
+            {
+                current_path_node_index = NearestPathNodeIndex();
+                current_movespeed = movement_speed_slow;
+                break;
+            }
 
         case State.PatrolWait:
             {
                 wait_timer = Random.Range(patrol_wait_time_bounds[0], patrol_wait_time_bounds[1]);
+                break;
+            }
+
+        case State.MoveToObject:
+            {
+                current_movespeed = movement_speed_fast;
                 break;
             }
 
@@ -249,8 +277,8 @@ public class AwkwardPerson : MonoBehaviour
     {
         var dist = target_pos - transform.position;
         var dir = dist.normalized;
-        var movement_amount = movement_speed * Time.deltaTime;
-        var movement_vec = dir * movement_speed * Time.deltaTime;
+        var movement_amount = current_movespeed * Time.deltaTime;
+        var movement_vec = dir * current_movespeed * Time.deltaTime;
 
         //set facing direction
         transform.LookAt(target_pos, Vector3.up);
