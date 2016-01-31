@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     
     Conversation.ConversationOptions currentConversation;
     
+    float lastUpdateAxis = 0;
+    
     // Use this for initialization
     void Start()
     {
@@ -89,8 +91,8 @@ public class GameManager : MonoBehaviour
         inConversation = true;
         currentConversation = GetComponent<Conversation>().GetRandomConversation();
         conversationText.text = currentConversation.conversationText;
-        option1Text.text = currentConversation.options[0].Key;
-        option2Text.text = currentConversation.options[1].Key;
+        option1Text.text = "(Up): " + currentConversation.options[0].Key;
+        option2Text.text = "(Down): " + currentConversation.options[1].Key;
     }
     
     public void AnswerAwkwardConversation(int optionPicked)
@@ -129,14 +131,19 @@ public class GameManager : MonoBehaviour
         if (inConversation)
         {
             float verticalAxis = Input.GetAxis("Vertical");
-            if (verticalAxis > 0)
+            if (lastUpdateAxis == 0)
             {
-                AnswerAwkwardConversation(0);
-            }
-            else if (verticalAxis < 0)
-            {
-                AnswerAwkwardConversation(1);
+                if (verticalAxis > 0)
+                {
+                    AnswerAwkwardConversation(0);
+                }
+                else if (verticalAxis < 0)
+                {
+                    AnswerAwkwardConversation(1);
+                }
             }
         }
+        
+        lastUpdateAxis = Input.GetAxis("Vertical");
     }
 }
