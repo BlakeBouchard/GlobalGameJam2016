@@ -18,7 +18,7 @@ public class AwkwardPersonCollision : MonoBehaviour
     {
         if (collision.collider.tag == "Player")
         {
-            OnTriggeredAwkwardPerson();
+//            OnTriggeredAwkwardPerson();
         }
     }
     

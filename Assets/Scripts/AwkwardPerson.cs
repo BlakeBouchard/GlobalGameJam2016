@@ -6,18 +6,17 @@ public class AwkwardPerson : MonoBehaviour
 {
     public enum Behaviour
     {
-        Idle
+          Idle
         , Patrolling
         , PatrolWait
         , MoveToObject
         , FleeObject
+        , Conversing
     }
-
-    // Public
+        
+    public float has_conversed = false; //no longer an active threat when true
     public Behaviour current_behaviour = Behaviour.Patrolling;
     public float movement_speed = 5.0f;
-    public Quaternion target_rotation;
-    public Quaternion prev_target_rotation;
 
     public Camera view_cam;
     public BoxCollider player_test;
@@ -27,10 +26,16 @@ public class AwkwardPerson : MonoBehaviour
     public List<Transform> current_path;
     public bool path_loops = true;
     int current_path_node_index = 0;
-    //---
 
-    public Quaternion idle_original_rotation;
+    public float conversation_range = 2.0f; //how close the player is before starting a conversation
+
+
     Vector3 movement_target;
+
+    Quaternion idle_original_rotation;
+    Quaternion target_rotation;
+    Quaternion prev_target_rotation;
+
     GameObject target_object = null;
 
     float wait_timer = 0.0f;
@@ -88,13 +93,31 @@ public class AwkwardPerson : MonoBehaviour
         UpdateBehaviourMachine();
 
         //testing frustum collision
-        if(CanSeePlayer(player_test.bounds))
+//        if(CanSeePlayer(player_test.bounds))
+        if(ShouldFollowPlayer())
         {
             GetComponent<MeshRenderer>().material.color = Color.red;
 
             this.SendMessage("OnTriggeredAwkwardPerson", null, SendMessageOptions.DontRequireReceiver);
+
+            if(WithinConversationRange(player_test.transform))
+            {
+                //todo: trigger conversation
+                if(current_behaviour != Behaviour.Conversing)
+                {
+                    SetState(Behaviour.Conversing);
+                }
+            }
+            else
+            {
+                if(current_behaviour != Behaviour.MoveToObject)
+                {
+                    target_object = player_test.gameObject;
+                    SetState(Behaviour.MoveToObject);
+                }
+            }    
         }
-        else
+        else //else should not follow player
         {
             GetComponent<MeshRenderer>().material.color = Color.green;
         }
@@ -104,6 +127,18 @@ public class AwkwardPerson : MonoBehaviour
     {
         Plane[] frustum_planes = GeometryUtility.CalculateFrustumPlanes(view_cam);
         return GeometryUtility.TestPlanesAABB(frustum_planes, player_bounds);
+    }
+
+    bool WithinConversationRange(Transform obj)
+    {
+        return (obj.transform.position - transform.position).magnitude <= conversation_range;
+    }
+
+    bool ShouldFollowPlayer()
+    {
+        //todo: check if eye contact is established, or already moving to target
+
+        return CanSeePlayer(player_test.bounds);
     }
 
     void SetState(Behaviour new_behaviour)
@@ -150,7 +185,7 @@ public class AwkwardPerson : MonoBehaviour
                     wait_timer = Random.Range(1.0f, 3.0f); //TODO expose as public var (or change to constant var)
                 }
 
-                transform.rotation = Quaternion.Lerp(prev_target_rotation, target_rotation, (1 - (wait_timer / 3.0f)));
+                transform.rotation = Quaternion.Lerp(prev_target_rotation, target_rotation, (1 - (wait_timer / 3.0f))); //FIXME do something less broken so it lerps from 0 to 1 properly
 
                 break;
             }
@@ -193,6 +228,8 @@ public class AwkwardPerson : MonoBehaviour
 
         case Behaviour.MoveToObject:
             {
+                movement_target = target_object.transform.position;
+                MoveToward(movement_target);
                 break;
             }
         }
