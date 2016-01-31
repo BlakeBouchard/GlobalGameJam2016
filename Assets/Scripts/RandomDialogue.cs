@@ -24,6 +24,12 @@ public class RandomDialogue : MonoBehaviour
             randomDialog.Add((string)line.Clone());
         }
     }
+    
+    public string GetRandomDialogueLine()
+    {
+        int lineNumber = Random.Range(0, randomDialog.Count);
+        return randomDialog[lineNumber];
+    }
 	
     // Update is called once per frame
     void Update()
