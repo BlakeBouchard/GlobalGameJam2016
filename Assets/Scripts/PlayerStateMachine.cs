@@ -19,9 +19,9 @@ public class PlayerStateMachine : MonoBehaviour
 
     AwkwardConversation current_awkward_convo;
 
-    PlayerState CurrentState { 
+    public PlayerState CurrentState { 
         get { return state_stack[state_stack.Count - 1]; }
-        set { state_stack[state_stack.Count - 1] = value; }
+        private set { state_stack[state_stack.Count - 1] = value; }
     }
     PlayerState PrevState { 
         get {
