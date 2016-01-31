@@ -106,7 +106,7 @@ public class AwkwardPerson : MonoBehaviour
         {
             if(ShouldFollowPlayer())
             {
-                GetComponent<MeshRenderer>().material.color = Color.red;
+                GetComponent<SpriteRenderer>().material.color = Color.red;
 
                 this.SendMessage("OnTriggeredAwkwardPerson", null, SendMessageOptions.DontRequireReceiver);
 
@@ -134,7 +134,7 @@ public class AwkwardPerson : MonoBehaviour
                     SetState(State.Patrolling);
                 }
 
-                GetComponent<MeshRenderer>().material.color = Color.green;
+                GetComponent<SpriteRenderer>().material.color = Color.green;
             }
         }
     }
@@ -206,7 +206,7 @@ public class AwkwardPerson : MonoBehaviour
                 Debug.Assert(player.GetComponent<PlayerStateMachine>() != null);
                 player.GetComponent<PlayerStateMachine>().EngageAwkwardConversation(this);
 
-                GetComponent<MeshRenderer>().material.color = Color.yellow;
+                GetComponent<SpriteRenderer>().material.color = Color.yellow;
 
                 break;
             }
@@ -307,7 +307,7 @@ public class AwkwardPerson : MonoBehaviour
     {
         has_conversed = true;
         SetState(State.Patrolling);
-        GetComponent<MeshRenderer>().material.color = Color.white;
+        GetComponent<SpriteRenderer>().material.color = Color.white;
     }
 
 
