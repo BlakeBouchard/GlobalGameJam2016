@@ -25,7 +25,7 @@ public class Beer : MonoBehaviour
             gameManager.ReduceStress(stressReductionAmount);
             
             shouldDestroy = true;
-            SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+            SpriteRenderer sprite = transform.Find("BeerSprite").GetComponent<SpriteRenderer>();
             
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, fadedOpacity);
             if (audio != null)
