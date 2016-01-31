@@ -212,7 +212,7 @@ public class AwkwardPerson : MonoBehaviour
         }
         else
         {
-            transform.position  += dir * movement_speed;
+            transform.position  += dir * movement_speed * Time.deltaTime;
         }
     }
 
