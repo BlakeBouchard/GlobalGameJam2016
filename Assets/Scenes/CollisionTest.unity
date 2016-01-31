@@ -688,6 +688,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11403858, guid: 71286a2550b044452ad3de413867ba90, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2365736, guid: 71286a2550b044452ad3de413867ba90, type: 2}
     - {fileID: 3377572, guid: 71286a2550b044452ad3de413867ba90, type: 2}
@@ -1140,6 +1144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ecb8cdfacfb4ef3af29f426afa6ed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  randomDialogue: {fileID: 0}
   speechBubble: {fileID: 109230, guid: 7627f922e1bd04f3b94b9131b862ebd7, type: 2}
 --- !u!1 &1994319168
 GameObject:
@@ -1343,4 +1348,4 @@ Transform:
   - {fileID: 34094069}
   - {fileID: 1727674815}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
