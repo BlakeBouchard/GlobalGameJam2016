@@ -107,7 +107,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void EngageAwkwardConversation(AwkwardPerson with_person)
     {
-        current_awkward_convo = new AwkwardConversation(this, with_person);
+        GameObject.Find("Game Manager").GetComponent<GameManager>().StartAwkwardConversation();
         PushState(PlayerState.InAwkwardConversation);
     }
     public void EndAwkwardConversation()

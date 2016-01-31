@@ -3,10 +3,13 @@ using System.Collections;
 
 public class SpeechBubble : MonoBehaviour
 {
+    GameManager gameManager;
     RandomDialogue randomDialogue;
     public float lifeTime = 3.0f;
     public float timeBetweenRolls = 1.0f;
     public float probabilityPercent = 10;
+    
+    bool showing = false;
     
     // Use this for initialization
     void Start()
@@ -14,7 +17,9 @@ public class SpeechBubble : MonoBehaviour
         // Set this object's rotation to be the same as the Main Camera
         transform.rotation = Camera.main.transform.rotation;
         
-        randomDialogue = GameObject.Find("Game Manager").GetComponent<RandomDialogue>();
+        GameObject gameManagerObject = GameObject.Find("Game Manager");
+        gameManager = gameManagerObject.GetComponent<GameManager>();
+        randomDialogue = gameManagerObject.GetComponent<RandomDialogue>();
         
         if (GetComponent<TextMesh>() == null)
         {
@@ -28,7 +33,7 @@ public class SpeechBubble : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(waitTime);
-            if (GetComponent<TextMesh>().text == "" && Random.Range(0, 100) < probabilityPercent)
+            if (GetComponent<TextMesh>().text == "" && !gameManager.inConversation && Random.Range(0, 100) < probabilityPercent)
             {
                 ShowSpeechBubble();
             }
@@ -41,12 +46,14 @@ public class SpeechBubble : MonoBehaviour
         Debug.Log("Speech should be shown here");
         StartCoroutine("HideSpeechBubble", lifeTime);
         SetText(randomDialogue.GetRandomDialogueLine());
+        showing = true;
     }
     
     IEnumerator HideSpeechBubble(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         SetText("");
+        showing = false;
     }
     
     void SetText(string text)
@@ -57,6 +64,11 @@ public class SpeechBubble : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        if (gameManager.inConversation && showing)
+        {
+            SetText("");
+            showing = false;
+        }
         transform.rotation = Camera.main.transform.rotation;
     }
 }

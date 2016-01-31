@@ -235,6 +235,22 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 494356, guid: 5f142e7cb3f334fa7976221fbc22b225, type: 2}
   m_PrefabInternal: {fileID: 261611791}
+--- !u!1 &290471948 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 193306, guid: d0374e61933e34c278caafccf1b4cb9f, type: 2}
+  m_PrefabInternal: {fileID: 1027318297}
+--- !u!114 &290471949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 290471948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 053c21567d347463ea27065c6749f211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conversationFile: Assets/Speech/Conversations.txt
 --- !u!1001 &387565746
 Prefab:
   m_ObjectHideFlags: 0
@@ -272,7 +288,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22474160, guid: 21a3d0ca2314b4590993a97429e0a814, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 22474160, guid: 21a3d0ca2314b4590993a97429e0a814, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -314,9 +330,26 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11404306, guid: 21a3d0ca2314b4590993a97429e0a814, type: 2}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11456548, guid: 21a3d0ca2314b4590993a97429e0a814, type: 2}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11425766, guid: 21a3d0ca2314b4590993a97429e0a814, type: 2}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 21a3d0ca2314b4590993a97429e0a814, type: 2}
   m_IsPrefabParent: 0
+--- !u!223 &387565747 stripped
+Canvas:
+  m_PrefabParentObject: {fileID: 22369636, guid: 21a3d0ca2314b4590993a97429e0a814,
+    type: 2}
+  m_PrefabInternal: {fileID: 387565746}
 --- !u!1001 &580084195
 Prefab:
   m_ObjectHideFlags: 0
@@ -644,6 +677,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 11491494, guid: d0374e61933e34c278caafccf1b4cb9f, type: 2}
+      propertyPath: guiObject
+      value: 
+      objectReference: {fileID: 387565747}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0374e61933e34c278caafccf1b4cb9f, type: 2}
   m_IsPrefabParent: 0

@@ -9,25 +9,33 @@ public class GameManager : MonoBehaviour
     public int stressLimit = 10;
     
     public Canvas guiObject;
-    Text conversationText;
-    string conversationString;
+    Text conversationLevelText;
+    string conversationLevelString;
     Text stressText;
     string stressString;
+    
+    Text conversationText;
+    Text option1Text;
+    Text option2Text;
+    
+    public bool inConversation;
     
     bool failed = false;
     
     bool won = false;
+    
+    Conversation.ConversationOptions currentConversation;
     
     // Use this for initialization
     void Start()
     {
         if (guiObject != null)
         {
-            conversationText = guiObject.transform.Find("Conversation").GetComponent<Text>();
-            if (conversationText != null)
+            conversationLevelText = guiObject.transform.Find("Conversation").GetComponent<Text>();
+            if (conversationLevelText != null)
             {
                 Debug.Log("Found conversation text");
-                conversationString = conversationText.text;
+                conversationLevelString = conversationLevelText.text;
             }
             
             stressText = guiObject.transform.Find("Stress").GetComponent<Text>();
@@ -37,6 +45,11 @@ public class GameManager : MonoBehaviour
                 stressString = stressText.text;
             }
             UpdateGUI();
+            
+            conversationText = guiObject.transform.Find("Conversation Text").GetComponent<Text>();
+            
+            option1Text = guiObject.transform.Find("Option 1 Text").GetComponent<Text>();
+            option2Text = guiObject.transform.Find("Option 2 Text").GetComponent<Text>();
         }
     }
     
@@ -60,15 +73,36 @@ public class GameManager : MonoBehaviour
     
     void UpdateGUI()
     {
-        if (conversationText != null)
+        if (conversationLevelText != null)
         {
-            conversationText.text = conversationString + conversationEnergy;
+            conversationLevelText.text = conversationLevelString + conversationEnergy;
         }
         
         if (stressText != null)
         {
             stressText.text = stressString + stressLevel;
         }
+    }
+    
+    public void StartAwkwardConversation()
+    {
+        inConversation = true;
+        currentConversation = GetComponent<Conversation>().GetRandomConversation();
+        conversationText.text = currentConversation.conversationText;
+        option1Text.text = currentConversation.options[0].Key;
+        option2Text.text = currentConversation.options[1].Key;
+    }
+    
+    public void AnswerAwkwardConversation(int optionPicked)
+    {
+        IncreaseStress(currentConversation.options[optionPicked].Value);
+        conversationText.text = "";
+        option1Text.text = "";
+        option2Text.text = "";
+        inConversation = false;
+        
+        GameObject.Find("AwkwardTurtle").SendMessage("EndAwkwardConversation", SendMessageOptions.DontRequireReceiver);
+        GameObject.Find("Player").SendMessage("EndAwkwardConversation", SendMessageOptions.DontRequireReceiver);
     }
 	
     // Update is called once per frame
@@ -90,6 +124,19 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Escape key pressed, quitting game");
             Application.Quit();
+        }
+        
+        if (inConversation)
+        {
+            float verticalAxis = Input.GetAxis("Vertical");
+            if (verticalAxis > 0)
+            {
+                AnswerAwkwardConversation(0);
+            }
+            else if (verticalAxis < 0)
+            {
+                AnswerAwkwardConversation(1);
+            }
         }
     }
 }
