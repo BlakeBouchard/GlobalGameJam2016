@@ -13,6 +13,7 @@ GameObject:
   - 114: {fileID: 11482908}
   - 114: {fileID: 11403858}
   - 114: {fileID: 11400076}
+  - 114: {fileID: 11414850}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -43,7 +44,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 147832}
   m_LocalRotation: {x: .239117637, y: .369643837, z: -.0990457758, w: .892399073}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: .100000001, z: 0}
   m_LocalScale: {x: .400000006, y: .400000006, z: 1}
   m_Children: []
   m_Father: {fileID: 453930}
@@ -114,6 +115,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4589afba020c740209911b6d2a21227c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11414850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2043380aa9185485ba11ec56d5b5119e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11482908
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,7 +162,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 63a5e5a0848bf4e189af26a8bccd09d2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2d70cdee15ffe478b855ef4877799966, type: 3}
   m_Color: {r: 1, g: .602941155, b: .735294104, a: 1}
 --- !u!1001 &100100000
 Prefab:
