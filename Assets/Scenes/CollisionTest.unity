@@ -1183,7 +1183,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 435966, guid: 9879fdcba18fb4fae9443d275cf623e9, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -6.44000006
+      value: -4.63999987
       objectReference: {fileID: 0}
     - target: {fileID: 435966, guid: 9879fdcba18fb4fae9443d275cf623e9, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1191,23 +1191,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 435966, guid: 9879fdcba18fb4fae9443d275cf623e9, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0
+      value: .25999999
       objectReference: {fileID: 0}
     - target: {fileID: 435966, guid: 9879fdcba18fb4fae9443d275cf623e9, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -.500000119
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 435966, guid: 9879fdcba18fb4fae9443d275cf623e9, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 435966, guid: 9879fdcba18fb4fae9443d275cf623e9, type: 2}
       propertyPath: m_LocalRotation.z
-      value: .5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 435966, guid: 9879fdcba18fb4fae9443d275cf623e9, type: 2}
       propertyPath: m_LocalRotation.w
-      value: .49999994
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 435966, guid: 9879fdcba18fb4fae9443d275cf623e9, type: 2}
       propertyPath: m_RootOrder
@@ -1280,9 +1280,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 434038, guid: 9879fdcba18fb4fae9443d275cf623e9, type: 2}
       propertyPath: m_LocalPosition.y
+      value: .730000019
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368168, guid: 9879fdcba18fb4fae9443d275cf623e9, type: 2}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2368168, guid: 9879fdcba18fb4fae9443d275cf623e9, type: 2}
+    - {fileID: 3343514, guid: 9879fdcba18fb4fae9443d275cf623e9, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9879fdcba18fb4fae9443d275cf623e9, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1801781484 stripped
