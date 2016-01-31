@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 481084}
   - 114: {fileID: 11491494}
+  - 114: {fileID: 11403350}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -28,6 +29,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11403350
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c36a01bcf9cd944d8885428b87f3ddb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomDialogueFile: Assets/Speech/RandomDialogue.txt
+  randomDialog: []
 --- !u!114 &11491494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -39,8 +53,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e953437c17b954d7eaf4e6051c228beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConversationGoal: 100
-  StressLimit: 10
+  conversationEnergy: 0
+  conversationGoal: 100
+  stressLevel: 0
+  stressLimit: 10
+  guiObject: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
