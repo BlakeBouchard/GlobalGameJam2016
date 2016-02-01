@@ -8,6 +8,8 @@ public class AwkwardPersonCollision : MonoBehaviour
     
     public float fadedOpacity = 0.3f;
     
+	public Renderer renderer;
+
     // Use this for initialization
     void Start()
     {
@@ -30,9 +32,6 @@ public class AwkwardPersonCollision : MonoBehaviour
             GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
             gameManager.IncreaseStress(stressIncrease);
             hasConversedAwkwardly = true;
-            
-            // Fade the Awkward Person out for now
-            Renderer renderer = GetComponent<Renderer>();
             
             renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, fadedOpacity);
         }
